@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Dolphin
+from .forms import FeedingForm
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -13,8 +15,11 @@ def dolphins_index(request):
     return render(request, 'dolphins/index.html', { 'dolphins': dolphins })
 
 def dolphins_detail(request, dolphin_id):
-  dolphin = Dolphin.objects.get(id=dolphin_id)
-  return render(request, 'dolphins/detail.html', { 'dolphin': dolphin })
+    dolphin = Dolphin.objects.get(id=dolphin_id)
+    feeding_form = FeedingForm()
+    return render(request, 'dolphins/detail.html', {
+    'dolphin': dolphin, 'feeding_form': feeding_form
+    })
 
 class DolphinCreate(CreateView):
     model = Dolphin
@@ -28,3 +33,11 @@ class DolphinUpdate(UpdateView):
 class DolphinDelete(DeleteView):
     model = Dolphin
     success_url = '/dolphins/'
+    
+def add_feeding(request, dolphin_id):
+    form = FeedingForm(request.POST)
+    if form.is_valid():
+        new_feeding = form.save(commit=False)
+        new_feeding.dolphin_id = dolphin_id
+        new_feeding.save()
+        return redirect('dolphins_detail', dolphin_id=dolphin_id)
