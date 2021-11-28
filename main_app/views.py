@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Dolphin
+from django.views.generic import ListView, DetailView
+from .models import Dolphin,Toy
 from .forms import FeedingForm
 
 # Create your views here.
@@ -41,3 +42,21 @@ def add_feeding(request, dolphin_id):
         new_feeding.dolphin_id = dolphin_id
         new_feeding.save()
         return redirect('dolphins_detail', dolphin_id=dolphin_id)
+    
+class ToyCreate(CreateView):
+    model = Toy
+    fields = '__all__'
+    
+class ToyList(ListView):
+  model = Toy
+
+class ToyDetail(DetailView):
+  model = Toy
+
+class ToyUpdate(UpdateView):
+  model = Toy
+  fields = ['name', 'color']
+
+class ToyDelete(DeleteView):
+  model = Toy
+  success_url = '/toys/'
