@@ -6,6 +6,8 @@ from .forms import FeedingForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class Home(LoginView):
@@ -13,8 +15,9 @@ class Home(LoginView):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def dolphins_index(request):
-    dolphins = Dolphin.objects.all()
+    dolphins = Dolphin.objects.filter(user=request.user)
     return render(request, 'dolphins/index.html', { 'dolphins': dolphins })
 
 def dolphins_detail(request, dolphin_id):
@@ -25,7 +28,7 @@ def dolphins_detail(request, dolphin_id):
     'dolphin': dolphin, 'feeding_form': feeding_form, 'toys': toys_dolphin_doesnt_have
     })
 
-class DolphinCreate(CreateView):
+class DolphinCreate(LoginRequiredMixin, CreateView):
   model = Dolphin
   fields = ['name', 'breed', 'description', 'age']
   def form_valid(self, form):
