@@ -38,7 +38,8 @@ class DolphinCreate(LoginRequiredMixin, CreateView):
 class DolphinUpdate(UpdateView):
     model = Dolphin
     fields = ['breed', 'description', 'age']
-
+    success_url = '/dolphins/'
+    
 class DolphinDelete(DeleteView):
     model = Dolphin
     success_url = '/dolphins/'
