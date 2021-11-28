@@ -26,6 +26,11 @@
       <h2>A {{ dolphin.breed }} calf.</h2>
     {% endif %}
     <p>{{ dolphin.description }}</p>
+    
+    <div class="dolphin-actions">
+      <a href="{% url 'dolphins_update' dolphin.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'dolphins_delete' dolphin.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 

@@ -6,4 +6,7 @@ urlpatterns = [
     path ('about/', views.about, name='about'),
     path('dolphins/', views.dolphins_index, name='dolphins_index'),
     path('dolphins/<int:dolphin_id>/', views.dolphins_detail, name='dolphins_detail'),
+    path('dolphins/create/', views.DolphinCreate.as_view(), name='dolphins_create'),
+    path('dolphins/<int:pk>/update/', views.DolphinUpdate.as_view(), name='dolphins_update'),
+    path('dolphins/<int:pk>/delete/', views.DolphinDelete.as_view(), name='dolphins_delete'),
 ]

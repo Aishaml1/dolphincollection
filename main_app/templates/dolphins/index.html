@@ -14,19 +14,19 @@
 <section class="card-container">
   {% for dolphin in dolphins %}
     <div class="card">
-      <a href="/dolphins/{{ dolphin.id }}">
+    <a href="{% url 'dolphins_detail' dolphin.id %}">
         <div class="card-content">
           <div class="card-img-container">
             <img 
               src="{% static 'images/sk8r-boi-dolphin.svg' %}" 
-              alt="A skater boy dolphin"
+              alt="A cool dolphin"
             >
           </div>
           <h2 class="card-title">{{ dolphin.name }}</h2>
           {% if dolphin.age > 0 %}
             <p>A {{ dolphin.age }} year old {{ dolphin.breed }}</p>
           {% else %}
-            <p>A {{ dolphin.breed }} kitten.</p>
+            <p>A {{ dolphin.breed }} calf.</p>
           {% endif %}
           <p><small>{{ dolphin.description }}</small></p>
         </div>

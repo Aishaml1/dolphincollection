@@ -28,11 +28,9 @@
       </a>
     </div>
     <nav>
-      <ul>
-<li><a href="/dolphins">All Dolphins</a></li>
-     {% comment %} <li><a href="{% url 'dolphins_index' %}">All Dolphins</a></li> {% endcomment %}
-      {% comment %} <li><a href="{% url 'dolphins_create' %}">Add a Dolphin</a></li>  {% endcomment %}
-        <li><a href="/about">About</a></li>
+     <li><a href="{% url 'dolphins_index' %}">All Dolphins</a></li>
+      <li><a href="{% url 'dolphins_create' %}">Add a Dolphin</a></li> 
+    <li><a href="{% url 'about' %}">About</a></li>
       </ul>
     </nav>
   </header>
