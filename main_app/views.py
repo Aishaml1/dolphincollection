@@ -17,9 +17,10 @@ def dolphins_index(request):
 
 def dolphins_detail(request, dolphin_id):
     dolphin = Dolphin.objects.get(id=dolphin_id)
+    toys_dolphin_doesnt_have = Toy.objects.exclude(id__in = dolphin.toys.all().values_list('id'))
     feeding_form = FeedingForm()
     return render(request, 'dolphins/detail.html', {
-    'dolphin': dolphin, 'feeding_form': feeding_form
+    'dolphin': dolphin, 'feeding_form': feeding_form, 'toys': toys_dolphin_doesnt_have
     })
 
 class DolphinCreate(CreateView):
