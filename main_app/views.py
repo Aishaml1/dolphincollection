@@ -17,9 +17,9 @@ def dolphins_detail(request, dolphin_id):
   return render(request, 'dolphins/detail.html', { 'dolphin': dolphin })
 
 class DolphinCreate(CreateView):
-  model = Dolphin
-  fields = '__all__'
-success_url = '/dolphins/'
+    model = Dolphin
+    fields = '__all__'
+    success_url = '/dolphins/'
 
 class DolphinUpdate(UpdateView):
     model = Dolphin
